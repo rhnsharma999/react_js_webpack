@@ -1,6 +1,5 @@
 const path = require("path")
-const htmlPlugin = require('html-webpack-plugin')
-
+const htmlPlugin = require("html-webpack-plugin")
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -9,12 +8,22 @@ module.exports = {
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
-    rules: [{ test: /\.tsx?$/, use: "ts-loader", exclude: "/node_modules/" }],
+    rules: [
+      { test: /\.tsx?$/, use: "ts-loader", exclude: "/node_modules/" },
+      {
+        test: /\.m?(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-react"],
+          },
+        },
+      },
+    ],
   },
-  plugins : [
-    new htmlPlugin({ template : './src/index.html'})
-  ]
+  plugins: [new htmlPlugin({ template: "./src/index.html" })],
 }
