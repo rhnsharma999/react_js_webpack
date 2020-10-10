@@ -1,14 +1,13 @@
 import * as React from "react"
-export interface RootComponentProps {}
+import "./RootComponent.css"
 
-export interface RootComponentState {}
-
-class RootComponent extends React.Component<
-  RootComponentProps,
-  RootComponentState
-> {
+class RootComponent extends React.Component {
   render() {
-    return <h1>Hello World</h1>
+    return (
+      <div className="container">
+        <h1>Hello World</h1>
+      </div>
+    )
   }
 }
 
